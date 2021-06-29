@@ -1,9 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
+import Tick from './components/Tick';
+import DataFetch from './components/DataFetch';
+import ComponentX from './components/ComponentX';
+import Title1 from './components/Title1';
+import Title2 from './components/Title2';
+
+export const TopLevelContext = React.createContext();
+export const CourseContext = React.createContext();
 
 function App() {
-  const [count, setCount] = useState(0)
+  const initislState = 0;
+  const [count, setCount] = useState(initislState)
   const increaseByTwo = () => {
     for (let i=0; i< 2; i++) {
       setCount(prevCount => prevCount + 1)
@@ -18,7 +27,16 @@ function App() {
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
       <button onClick={() => setCount(count - 1)}>Decrease Count</button>
       <button onClick={increaseByTwo}>Increase By two</button>
+      <Title1/>
+      <Title2/>
       <ArrayApp/>
+      <Tick/>
+      <DataFetch/>
+      <TopLevelContext.Provider value={'I am from Top level!!'}>
+        <CourseContext.Provider value={'React course'}>
+          <ComponentX/>
+        </CourseContext.Provider>
+      </TopLevelContext.Provider>
     </div>
   );
 }
